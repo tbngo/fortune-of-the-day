@@ -1,0 +1,43 @@
+openapi: 3.0.0
+info:
+  title: To-do API
+  description: To-do web application by [The Ngo](http://thengo.dev/).
+  version: 0.1.0
+  
+paths:
+  /fortune:
+    get:
+      summary: Returns a fortune.
+      description: Returns a fortune from DynamoDB.
+      responses:
+        '200':
+          description: A JSON object of a fortune
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Fortune'
+    post:
+      summary: Creates a new fortune.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Fortune'
+      responses:
+        '200':
+          description: Created
+
+components:
+  schemas:
+    Fortune:
+      properties:
+        id:
+          type: integer
+          format: int64
+        fortune:
+          type: string
+          example: Tomorrow is a latter-day
+      # Both properties are required
+      required:  
+        - fortune
